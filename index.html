@@ -10,9 +10,83 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="/">Bibliotecas Paco González</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio"
+                            href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio"
+                            href="index.html">Buscar Libro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio"
+                            href="index.html">Listar Libros</a>
+                    </li>
+                </ul>
+            </div>
+            <form class="gap-5">
+                <a class="btn btn-outline-light btn-success" href="./login.html">Iniciar Sesión</a>
+                <a class="btn btn-outline-light" href="./register.html">Registrarse</a>
+                <a class="btn btn-outline-light btn-warning" href="/login">Ver Carrito</a>
+                <a class="btn btn-outline-light btn-danger" href="/login">Cerrar Sesión</a>
+            </form>
+        </div>
+    </nav>
     <main>
-        
+        <div class="container-fluid mt-5 mb-5">
+            <div class="row m-5">
+                <div class="col-12 text-center mb-5">
+                    <h1>Catálogo de libros</h1>
+                </div>
+                <div class="col-12 p-3 rounded text-center bg-primary text-white">
+                    <div class="row">
+                        <div class="col-3">
+                            Titulo
+                        </div>
+                        <div class="col-3">
+                            Autor
+                        </div>
+                        <div class="col-3">
+                            Editorial
+                        </div>
+                        <div class="col-3">
+                            Genero
+                        </div>
+                    </div>
+                </div>
+                <a href="/" class="btn col-12 bg-primary mt-3 rounded text-white">
+                    <div class="row">
+                        <div class="col-3">
+                            NuevoLibro
+                        </div>
+                        <div class="col-3">
+                            NuevoAutor
+                        </div>
+                        <div class="col-3">
+                            NuevaEditorial
+                        </div>
+                        <div class="col-3">
+                            NuevoGénero
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
     </main>
+    <footer class="text-center text-white fixed-bottom bg-primary">
+        <div class="text-center p-3">
+            <a class="text-white">© 2023 Copyright: Libros Paco</a>
+        </div>
+    </footer>
     <script src="js/bootstrap.min.js"></script>
 </body>
 
