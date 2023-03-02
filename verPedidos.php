@@ -34,6 +34,7 @@ include './php/conexion.php';
                         <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Listar Libros</a>
                     </li>
                     <?php
+                    // Comprueba que es admin
                     if (isset($_SESSION["admin"])) {
                     ?>
                         <li class="nav-item">
@@ -55,6 +56,7 @@ include './php/conexion.php';
             </div>
             <form class="gap-5">
                 <?php
+                // Comprueba que está logueado
                 if (isset($_SESSION["login"])) {
                 ?>
                     <a class="btn btn-outline-light btn-warning" href="./carrito.php">Ver Carrito</a>
@@ -71,6 +73,7 @@ include './php/conexion.php';
         </div>
     </nav>
     <main class="mb-5">
+        <!-- Comprueba que es admin -->
         <?php if (isset($_SESSION["admin"])) { ?>
             <div class="container-fluid mt-5 mb-5">
                 <div class="row m-5">
@@ -106,16 +109,23 @@ include './php/conexion.php';
                         </div>
                     </div>
                     <?php
+                    // Selecciona todos los carritos de la BBDD
                     $query = "SELECT * FROM carrito";
                     $resultado = mysqli_query($db, $query);
                     if (mysqli_num_rows($resultado) > 0) {
+                        // Se usa cada resultado de carrito gracias al bucle
                         while ($row = mysqli_fetch_assoc($resultado)) {
+                            // De ese carrito se saca la id del carrito
                             $idCarrito = $row["id"];
+                            // Se realiza query a los productos del carrito gracias a la id del carrito
                             $queryPedido = "SELECT * FROM carrito_producto WHERE cart_id = " . $idCarrito;
                             $resultadoPedido = mysqli_query($db, $queryPedido);
+                            // Cada resultado se usa
                             while ($rowPedido = mysqli_fetch_assoc($resultadoPedido)) {
+                                // Se realiza una query a los libros a los que hace referencia el carrito
                                 $queryLibro = "SELECT * FROM libros WHERE id = '" . $rowPedido["product_id"] . "'";
                                 $resultadoLibro = mysqli_query($db, $queryLibro);
+                                // Se usa ese libro
                                 $rowLibro = mysqli_fetch_assoc($resultadoLibro)
                     ?>
                                 <div class="col-12 p-3 mt-5 rounded text-center bg-primary text-white">
@@ -137,6 +147,7 @@ include './php/conexion.php';
                                         </div>
                                         <div class="col-1">
                                             <?php
+                                            // Se calcula el precio total multiplicando el precio del libro por la cantidad pedida del usuario
                                             print($rowLibro["Precio"] * $rowPedido["q"]);
                                             ?>
                                             €

@@ -15,6 +15,7 @@ include 'php/funciones.php';
 </head>
 
 <?php
+// Recuperación de posibles errores traidos por la URL
 $error = recoge("errorLogin");
 ?>
 
@@ -43,6 +44,7 @@ $error = recoge("errorLogin");
                             <a class="btn btn-success mt-5 buttonFormat" href="./register.php">Registrarse</a>
                         </div>
                         <?php
+                        // Control de errores al loguearse
                         if ($error) {
                         ?>
                             <p class="text-center mt-3 p-1 bg-danger">Usuario o contraseña incorrectos</p>

@@ -34,6 +34,7 @@ include './php/conexion.php';
                         <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Listar Libros</a>
                     </li>
                     <?php
+                    // Comprueba si el usuario es admin
                     if (isset($_SESSION["admin"])) {
                     ?>
                         <li class="nav-item">
@@ -55,6 +56,7 @@ include './php/conexion.php';
             </div>
             <form class="gap-5">
                 <?php
+                // Comprueba si está logueado
                 if (isset($_SESSION["login"])) {
                 ?>
                     <a class="btn btn-outline-light btn-warning" href="./carrito.php">Ver Carrito</a>
@@ -100,10 +102,12 @@ include './php/conexion.php';
                 </div>
 
                 <?php
+                // Realiza una búsqueda de todos los libros de la BBDD
                 $query = "SELECT * FROM libros";
                 $resultado = mysqli_query($db, $query);
                 if (mysqli_num_rows($resultado) > 0) {
                     while ($row = mysqli_fetch_assoc($resultado)) {
+                        // Por cada libro encontrado los pinta con el siguiente formato
                 ?>
                         <a href="./verLibro.php?id=<?php
                                                     print($row["id"]);
@@ -144,6 +148,7 @@ include './php/conexion.php';
                     <?php
                     }
                 } else {
+                    // Si no existieran libros en la BBDD
                     ?>
                     <a class="btn col-12 bg-primary mt-3 rounded text-white">
                         <div class="row">

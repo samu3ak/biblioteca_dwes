@@ -2,6 +2,7 @@
 session_start();
 include './php/funciones.php';
 include './php/conexion.php';
+// Recuperación de errores pasados por URL
 $error = recoge("error");
 $agregado = recoge("agregado");
 ?>
@@ -36,6 +37,7 @@ $agregado = recoge("agregado");
                         <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Listar Libros</a>
                     </li>
                     <?php
+                    // Comprueba si es admin
                     if (isset($_SESSION["admin"])) {
                     ?>
                         <li class="nav-item">
@@ -57,6 +59,7 @@ $agregado = recoge("agregado");
             </div>
             <form class="gap-5">
                 <?php
+                // Comprueba que tenga la sesión iniciada
                 if (isset($_SESSION["login"])) {
                 ?>
                     <a class="btn btn-outline-light btn-warning" href="./carrito.php">Ver Carrito</a>
@@ -73,6 +76,7 @@ $agregado = recoge("agregado");
         </div>
     </nav>
     <main>
+        <!-- Comprueba si es admin, ya que es una funcionalidad sólo de admin -->
         <?php if (isset($_SESSION["admin"])) { ?>
             <div class="container-fluid mt-5 mb-5">
                 <div class="row justify-content-center">
@@ -113,6 +117,7 @@ $agregado = recoge("agregado");
                                 <button type="submit" class="btn btn-success mt-5 buttonFormat me-sm-0 me-md-5">Insertar Libro</button>
                             </div>
                             <?php
+                            // Control de errores e inserción satisfactoria
                             if ($error) {
                             ?>
                                 <p class="text-center mt-3 p-1 bg-danger">Rellena correctamente los campos solicitados</p>
@@ -128,6 +133,7 @@ $agregado = recoge("agregado");
                 </div>
             </div>
         <?php } else { ?>
+            <!-- Si no se tiene permisos al no ser admin -->
             <div class="col-12 text-center mt-5">
                 <h1>No tiene permisos para ver esto</h1>
             </div>

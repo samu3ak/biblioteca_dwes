@@ -15,6 +15,7 @@ include 'php/funciones.php';
 </head>
 
 <?php
+// Recuperación de errores al registrarse
 $errorRegistro = recoge("errorRegistro");
 $registrado = recoge("registrado");
 ?>
@@ -52,6 +53,7 @@ $registrado = recoge("registrado");
                             <a class="btn btn-success mt-5 buttonFormat" href="./index.php">Volver a Inicio</a>
                         </div>
                         <?php
+                        // Control de errores y registro satisfactorio
                         if ($registrado) {
                         ?>
                             <p class="text-center mt-4 p-2 bg-success rounded">Usuario creado satisfactoriamente</p>

@@ -3,6 +3,7 @@
 * Este archio muestra los productos en una tabla.
 */
 session_start();
+// Variable para luego sumar el total a pagar
 $totalPagar = 0;
 include "php/conexion.php";
 ?>
@@ -15,7 +16,7 @@ include "php/conexion.php";
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg bg-primary">
+    <nav class="navbar navbar-expand-lg bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand text-white">Bibliotecas Paco González</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,6 +34,7 @@ include "php/conexion.php";
                         <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Listar Libros</a>
                     </li>
                     <?php
+                    // Comprueba si es admin
                     if (isset($_SESSION["admin"])) {
                     ?>
                         <li class="nav-item">
@@ -54,6 +56,7 @@ include "php/conexion.php";
             </div>
             <form class="gap-5">
                 <?php
+                // Comprueba que tiene la sesión iniciada
                 if (isset($_SESSION["login"])) {
                 ?>
                     <a class="btn btn-outline-light btn-warning" href="./carrito.php">Ver Carrito</a>
@@ -147,6 +150,7 @@ include "php/conexion.php";
 
 
                 <?php else : ?>
+                    <!-- Si no hay productos en el carrito -->
                     <p class="alert alert-warning">El carrito esta vacio.</p>
                 <?php endif; ?>
 

@@ -34,6 +34,7 @@ include './php/conexion.php';
                         <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Listar Libros</a>
                     </li>
                     <?php
+                    // Si es admin
                     if (isset($_SESSION["admin"])) {
                     ?>
                         <li class="nav-item">
@@ -55,6 +56,7 @@ include './php/conexion.php';
             </div>
             <form class="gap-5">
                 <?php
+                // Comprueba que esté logueado
                 if (isset($_SESSION["login"])) {
                 ?>
                     <a class="btn btn-outline-light btn-warning" href="./carrito.php">Ver Carrito</a>
@@ -71,6 +73,7 @@ include './php/conexion.php';
         </div>
     </nav>
     <main>
+        <!-- Comprueba que sea admin, ya que es una fucionalidad sólo para administradores de la aplicación -->
         <?php if (isset($_SESSION["admin"])) { ?>
             <div class="container-fluid mt-5 mb-5">
                 <div class="row m-5">
@@ -96,11 +99,14 @@ include './php/conexion.php';
 
                     <?php
                     $hayUsuarios = false;
+                    // Recupera todos los usuarios de la base de datos
                     $query = "SELECT * FROM usuario";
                     $resultado = mysqli_query($db, $query);
                     if (mysqli_num_rows($resultado) > 0) {
                         while ($row = mysqli_fetch_assoc($resultado)) {
+                            // Por cada resultado de usuario lo pinta con el siguiente formato, obviando el usuario administrador
                             if ($row["nombre"] != "admin") {
+                                // Si entra en la condición, ha encontrado usuarios, se cambia el booleano a true
                                 $hayUsuarios = true;
                     ?>
                                 <div class="col-12 p-3 mt-5 rounded text-center bg-primary text-white">
@@ -136,6 +142,7 @@ include './php/conexion.php';
                             }
                         }
                     }
+                    // Si no ha entrado en la condición, se usa este interruptor para mostrar que no hay usuarios registrados en la BBDD
                     if (!$hayUsuarios) {
                         ?>
                         <a class="btn col-12 bg-primary mt-3 rounded text-white">
@@ -151,6 +158,7 @@ include './php/conexion.php';
             </div>
         <?php } else { ?>
             <div class="col-12 text-center mt-5">
+                <!-- Si no es administrador el usuario -->
                 <h1>No tiene permisos para ver esto</h1>
             </div>
         <?php } ?>

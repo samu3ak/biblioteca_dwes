@@ -34,6 +34,7 @@ include './php/conexion.php';
                         <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Listar Libros</a>
                     </li>
                     <?php
+                    // Se comprueba si es admin
                     if (isset($_SESSION["admin"])) {
                     ?>
                         <li class="nav-item">
@@ -55,6 +56,7 @@ include './php/conexion.php';
             </div>
             <form class="gap-5">
                 <?php
+                // Se comprueba que está logueado
                 if (isset($_SESSION["login"])) {
                 ?>
                     <a class="btn btn-outline-light btn-warning" href="./carrito.php">Ver Carrito</a>
@@ -71,6 +73,7 @@ include './php/conexion.php';
         </div>
     </nav>
     <main class="mb-5">
+        <!-- Comprueba que es admin -->
         <?php if (isset($_SESSION["admin"])) { ?>
             <div class="container-fluid mt-5 mb-5">
                 <div class="row m-5">
@@ -91,9 +94,11 @@ include './php/conexion.php';
                         </div>
                     </div>
                     <?php
+                    // Selecciona todos los carritos que hay en la BBDD
                     $query = "SELECT * FROM carrito";
                     $resultado = mysqli_query($db, $query);
                     if (mysqli_num_rows($resultado) > 0) {
+                        // Por cada carrito lo imprime con los datos asociados
                         while ($row = mysqli_fetch_assoc($resultado)) {
                     ?>
                             <div class="col-12 p-3 mt-5 rounded text-center bg-primary text-white">

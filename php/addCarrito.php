@@ -3,6 +3,7 @@
 * Agrega el producto a la variable de sesion de productos.
 */
 session_start();
+// Comprueba que está logueado
 if (!isset($_SESSION["login"])) {
 	print "<script>window.location='../login.php';</script>";
 } else {

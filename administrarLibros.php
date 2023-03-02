@@ -34,6 +34,7 @@ include './php/conexion.php';
                         <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Listar Libros</a>
                     </li>
                     <?php
+                    // Comprueba si es admin
                     if (isset($_SESSION["admin"])) {
                     ?>
                         <li class="nav-item">
@@ -55,6 +56,7 @@ include './php/conexion.php';
             </div>
             <form class="gap-5">
                 <?php
+                // Comprueba que tiene la sesión iniciada
                 if (isset($_SESSION["login"])) {
                 ?>
                     <a class="btn btn-outline-light btn-warning" href="./carrito.php">Ver Carrito</a>
@@ -71,6 +73,7 @@ include './php/conexion.php';
         </div>
     </nav>
     <main>
+        <!-- Comprueba que el que intentaq acceder es administrador -->
         <?php if (isset($_SESSION["admin"])) { ?>
             <div class="container-fluid mt-5 mb-5">
                 <div class="row m-5">
@@ -105,10 +108,12 @@ include './php/conexion.php';
                     </div>
 
                     <?php
+                    // Trae todos los libros de la BBDD
                     $query = "SELECT * FROM libros";
                     $resultado = mysqli_query($db, $query);
                     if (mysqli_num_rows($resultado) > 0) {
                         while ($row = mysqli_fetch_assoc($resultado)) {
+                            // Por cada resultado/libro lo pinta con el siguiente formato
                     ?>
                             <div class="col-12 p-3 mt-5 rounded text-center bg-primary text-white">
                                 <div class="row">
@@ -143,6 +148,7 @@ include './php/conexion.php';
                                         print($row["Descripción"]);
                                         ?>
                                     </div>
+                                    <!-- Lo envía a la URL con la id por parámetro en la URL para ver los detalles del libro -->
                                     <div class="col-12 mt-4">
                                         <a href="./php/accionEliminarLibro.php?id=<?php
                                                                                     print($row["id"]);
@@ -153,6 +159,7 @@ include './php/conexion.php';
                         <?php
                         }
                     } else {
+                        // Si no hay libros registrados
                         ?>
                         <a class="btn col-12 bg-primary mt-3 rounded text-white">
                             <div class="row">

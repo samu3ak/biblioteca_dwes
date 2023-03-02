@@ -34,6 +34,7 @@ include './php/conexion.php';
                         <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Listar Libros</a>
                     </li>
                     <?php
+                    // Se comprueba si es admin
                     if (isset($_SESSION["admin"])) {
                     ?>
                         <li class="nav-item">
@@ -55,6 +56,7 @@ include './php/conexion.php';
             </div>
             <form class="gap-5">
                 <?php
+                // Comprueba si tiene sesión iniciada
                 if (isset($_SESSION["login"])) {
                 ?>
                     <a class="btn btn-outline-light btn-warning" href="./carrito.php">Ver Carrito</a>
@@ -77,10 +79,12 @@ include './php/conexion.php';
                     <h1>Ver Libro</h1>
                 </div>
                 <?php
+                // Se recoge la id del libro pasada por la URL
                 $id = recoge("id");
                 $query = "SELECT * FROM libros WHERE id = " . $id;
                 $resultado = mysqli_query($db, $query);
                 if (mysqli_num_rows($resultado) > 0) {
+                    // Se imprime el libro por pantalla
                     while ($row = mysqli_fetch_assoc($resultado)) {
                 ?>
                         <form class="form-inline" method="post" action="./php/addCarrito.php">

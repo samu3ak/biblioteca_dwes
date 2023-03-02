@@ -2,6 +2,7 @@
 session_start();
 include './php/funciones.php';
 include './php/conexion.php';
+// Recuperación de posibles errores
 $error = recoge("error");
 $agregado = recoge("agregado");
 ?>
@@ -18,7 +19,7 @@ $agregado = recoge("agregado");
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg bg-primary">
+    <nav class="navbar navbar-expand-lg bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand text-white">Bibliotecas Paco González</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,6 +37,7 @@ $agregado = recoge("agregado");
                         <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Listar Libros</a>
                     </li>
                     <?php
+                    // Comprueba si el usuario es administrador
                     if (isset($_SESSION["admin"])) {
                     ?>
                         <li class="nav-item">
@@ -57,6 +59,7 @@ $agregado = recoge("agregado");
             </div>
             <form class="gap-5">
                 <?php
+                // Comprueba que esté logueado
                 if (isset($_SESSION["login"])) {
                 ?>
                     <a class="btn btn-outline-light btn-warning" href="./carrito.php">Ver Carrito</a>
@@ -97,6 +100,7 @@ $agregado = recoge("agregado");
                             <button type="submit" class="btn btn-success mt-5 buttonFormat">Realizar Búsqueda</button>
                         </div>
                         <?php
+                        // Control de errores en los criterios de búsqueda
                         if ($error) {
                         ?>
                             <p class="text-center mt-3 p-1 bg-danger">Rellena correctamente los campos solicitados</p>

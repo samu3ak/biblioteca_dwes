@@ -34,6 +34,7 @@ include './php/conexion.php';
                         <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Listar Libros</a>
                     </li>
                     <?php
+                    // Comprueba si es admin
                     if (isset($_SESSION["admin"])) {
                     ?>
                         <li class="nav-item">
@@ -55,6 +56,7 @@ include './php/conexion.php';
             </div>
             <form class="gap-5">
                 <?php
+                // Comprueba que tiene la sesión iniciada
                 if (isset($_SESSION["login"])) {
                 ?>
                     <a class="btn btn-outline-light btn-warning" href="./carrito.php">Ver Carrito</a>
@@ -100,11 +102,14 @@ include './php/conexion.php';
                 </div>
 
                 <?php
+                // Recoge los criterios de búsqueda del usuario
                 $filtrado = recoge("filtrado");
                 $busqueda = recoge("busqueda");
+                // Realiza la query con el filtrado
                 $query = "SELECT * FROM libros WHERE " . $filtrado . " LIKE '%" . $busqueda . "%'";
                 $resultado = mysqli_query($db, $query);
                 if (mysqli_num_rows($resultado) > 0) {
+                    // Por cada row encontrada con esos criterios los muestra por pantalla con el siguiente formato
                     while ($row = mysqli_fetch_assoc($resultado)) {
                 ?>
                         <a href="./verLibro.php?id=<?php
@@ -145,6 +150,7 @@ include './php/conexion.php';
                         </a>
                     <?php
                     }
+                    // Si no ha encontrado libros con esos criterios
                 } else {
                     ?>
                     <a class="btn col-12 bg-primary mt-3 rounded text-white">
