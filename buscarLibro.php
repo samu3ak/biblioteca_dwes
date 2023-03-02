@@ -20,7 +20,7 @@ $agregado = recoge("agregado");
 <body>
 <nav class="navbar navbar-expand-lg bg-primary">
         <div class="container-fluid">
-            <a class="navbar-brand text-white" href="/">Bibliotecas Paco González</a>
+            <a class="navbar-brand text-white">Bibliotecas Paco González</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
