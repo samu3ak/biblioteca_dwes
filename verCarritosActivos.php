@@ -70,94 +70,72 @@ include './php/conexion.php';
             </form>
         </div>
     </nav>
-    <main>
-        <div class="container-fluid mt-5 mb-5">
-            <div class="row m-5">
-                <div class="col-12 text-center mb-5">
-                    <h1>Catálogo de libros</h1>
-                </div>
-                <div class="col-12 p-3 rounded text-center bg-primary text-white">
-                    <div class="row">
-                        <div class="col-2">
-                            Titulo
-                        </div>
-                        <div class="col-2">
-                            Autor
-                        </div>
-                        <div class="col-2">
-                            Editorial
-                        </div>
-                        <div class="col-2">
-                            Fecha Publicación
-                        </div>
-                        <div class="col-2">
-                            Género
-                        </div>
-                        <div class="col-2">
-                            Descripción
+    <main class="mb-5">
+        <?php if (isset($_SESSION["admin"])) { ?>
+            <div class="container-fluid mt-5 mb-5">
+                <div class="row m-5">
+                    <div class="col-12 text-center mb-5">
+                        <h1>Ver Carritos Activos</h1>
+                    </div>
+                    <div class="col-12 p-3 rounded text-center bg-primary text-white">
+                        <div class="row justify-content-center">
+                            <div class="col-4">
+                                Correo dueño carrito
+                            </div>
+                            <div class="col-4">
+                                Fecha procesado de carrito
+                            </div>
+                            <div class="col-4">
+                                Id del carrito
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <?php
-                $query = "SELECT * FROM libros";
-                $resultado = mysqli_query($db, $query);
-                if (mysqli_num_rows($resultado) > 0) {
-                    while ($row = mysqli_fetch_assoc($resultado)) {
-                ?>
-                        <a href="./verLibro.php?id=<?php
-                                                    print($row["id"]);
-                                                    ?>" class="btn col-12 bg-primary mt-3 rounded text-white">
+                    <?php
+                    $query = "SELECT * FROM carrito";
+                    $resultado = mysqli_query($db, $query);
+                    if (mysqli_num_rows($resultado) > 0) {
+                        while ($row = mysqli_fetch_assoc($resultado)) {
+                    ?>
+                            <div class="col-12 p-3 mt-5 rounded text-center bg-primary text-white">
+                                <div class="row justify-content-center">
+                                    <div class="col-4">
+                                        <?php
+                                        print($row["client_email"]);
+                                        ?>
+                                    </div>
+                                    <div class="col-4">
+                                        <?php
+                                        print($row["created_at"]);
+                                        ?>
+                                    </div>
+                                    <div class="col-4">
+                                        <?php
+                                        print($row["id"]);
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                    } else {
+                        ?>
+                        <a class="btn col-12 bg-primary mt-3 rounded text-white">
                             <div class="row">
-                                <div class="col-2">
-                                    <?php
-                                    print($row["Titulo"]);
-                                    ?>
-                                </div>
-                                <div class="col-2">
-                                    <?php
-                                    print($row["Autor"]);
-                                    ?>
-                                </div>
-                                <div class="col-2">
-                                    <?php
-                                    print($row["Editorial"]);
-                                    ?>
-                                </div>
-                                <div class="col-2">
-                                    <?php
-                                    print($row["Fecha_publicacion"]);
-                                    ?>
-                                </div>
-                                <div class="col-2">
-                                    <?php
-                                    print($row["Genero"]);
-                                    ?>
-                                </div>
-                                <div class="col-2">
-                                    <?php
-                                    print($row["Descripción"]);
-                                    ?>
-                                </div>
+                                <div class="col-12">No hay carritos disponibles</div>
                             </div>
                         </a>
                     <?php
                     }
-                } else {
                     ?>
-                    <a class="btn col-12 bg-primary mt-3 rounded text-white">
-                        <div class="row">
-                            <div class="col-12">No hay libros disponibles</div>
-                        </div>
-                    </a>
-                <?php
-                }
-                ?>
 
+                </div>
+            </div><?php } else { ?>
+            <div class="col-12 text-center mt-5">
+                <h1>No tiene permisos para ver esto</h1>
             </div>
-        </div>
+        <?php } ?>
     </main>
-    <footer class="text-center text-white fixed-bottom bg-primary">
+    <footer class="text-center text-white mt-5 fixed-bottom bg-primary">
         <div class="text-center p-3">
             <a class="text-white">© 2023 Copyright: Libros Paco</a>
         </div>

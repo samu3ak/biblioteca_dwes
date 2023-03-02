@@ -8,6 +8,6 @@ if (!isset($_SESSION["login"]) || !isset($_SESSION["admin"])) {
     $id = recoge("id");
 
 
-    $query = $db->query("DELETE FROM `libros` WHERE id='" . $id . "'");
-    header("Location:../administrarLibros.php");
+    $query = $db->query("DELETE FROM `usuario` WHERE id='" . $id . "'");
+    header("Location:../administrarUsuarios.php");
 }

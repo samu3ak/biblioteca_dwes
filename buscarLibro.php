@@ -18,7 +18,7 @@ $agregado = recoge("agregado");
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-primary">
+<nav class="navbar navbar-expand-lg bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand text-white" href="/">Bibliotecas Paco González</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +30,7 @@ $agregado = recoge("agregado");
                         <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Buscar Libro</a>
+                        <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="./buscarLibro.php">Buscar Libro</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Listar Libros</a>
@@ -42,13 +42,13 @@ $agregado = recoge("agregado");
                             <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="./administrarLibros.php">Adminisitrar Libros</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Adminisitrar Usuarios</a>
+                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="./administrarUsuarios.php">Adminisitrar Usuarios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Ver Carritos Activos</a>
+                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="./verCarritosActivos.php">Ver Carritos Activos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Ver Pedidos</a>
+                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="./verPedidos.php">Ver Pedidos</a>
                         </li>
                     <?php
                     }
@@ -59,7 +59,7 @@ $agregado = recoge("agregado");
                 <?php
                 if (isset($_SESSION["login"])) {
                 ?>
-                    <a class="btn btn-outline-light btn-warning" href="/login">Ver Carrito</a>
+                    <a class="btn btn-outline-light btn-warning" href="./carrito.php">Ver Carrito</a>
                     <a class="btn btn-outline-light btn-danger" href="./php/accionLogout.php">Cerrar Sesión</a>
                 <?php
                 } else {

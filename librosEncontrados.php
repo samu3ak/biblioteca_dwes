@@ -40,13 +40,13 @@ include './php/conexion.php';
                             <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="./administrarLibros.php">Adminisitrar Libros</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Adminisitrar Usuarios</a>
+                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="./administrarUsuarios.php">Adminisitrar Usuarios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Ver Carritos Activos</a>
+                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="./verCarritosActivos.php">Ver Carritos Activos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Ver Pedidos</a>
+                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="./verPedidos.php">Ver Pedidos</a>
                         </li>
                     <?php
                     }
@@ -57,7 +57,7 @@ include './php/conexion.php';
                 <?php
                 if (isset($_SESSION["login"])) {
                 ?>
-                    <a class="btn btn-outline-light btn-warning" href="/login">Ver Carrito</a>
+                    <a class="btn btn-outline-light btn-warning" href="./carrito.php">Ver Carrito</a>
                     <a class="btn btn-outline-light btn-danger" href="./php/accionLogout.php">Cerrar Sesión</a>
                 <?php
                 } else {

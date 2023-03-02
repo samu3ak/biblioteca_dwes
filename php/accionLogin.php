@@ -15,5 +15,6 @@ if ($row == null) {
         $_SESSION["admin"] = true;
     }
     $_SESSION["login"] = $row["id"];
+    $_SESSION["correo"] = $row["correo"];
     header("Location:../index.php");
 }

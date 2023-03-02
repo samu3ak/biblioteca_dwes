@@ -16,7 +16,7 @@ include './php/conexion.php';
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-primary">
+<nav class="navbar navbar-expand-lg bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand text-white" href="/">Bibliotecas Paco González</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,7 +28,7 @@ include './php/conexion.php';
                         <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Buscar Libro</a>
+                        <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="./buscarLibro.php">Buscar Libro</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Listar Libros</a>
@@ -40,13 +40,13 @@ include './php/conexion.php';
                             <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="./administrarLibros.php">Adminisitrar Libros</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Adminisitrar Usuarios</a>
+                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="./administrarUsuarios.php">Adminisitrar Usuarios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Ver Carritos Activos</a>
+                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="./verCarritosActivos.php">Ver Carritos Activos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Ver Pedidos</a>
+                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="./verPedidos.php">Ver Pedidos</a>
                         </li>
                     <?php
                     }
@@ -57,7 +57,7 @@ include './php/conexion.php';
                 <?php
                 if (isset($_SESSION["login"])) {
                 ?>
-                    <a class="btn btn-outline-light btn-warning" href="/login">Ver Carrito</a>
+                    <a class="btn btn-outline-light btn-warning" href="./carrito.php">Ver Carrito</a>
                     <a class="btn btn-outline-light btn-danger" href="./php/accionLogout.php">Cerrar Sesión</a>
                 <?php
                 } else {
@@ -76,29 +76,6 @@ include './php/conexion.php';
                 <div class="col-12 text-center mb-5">
                     <h1>Ver Libro</h1>
                 </div>
-                <div class="col-12 p-3 rounded text-center bg-primary text-white">
-                    <div class="row">
-                        <div class="col-2">
-                            Titulo
-                        </div>
-                        <div class="col-2">
-                            Autor
-                        </div>
-                        <div class="col-2">
-                            Editorial
-                        </div>
-                        <div class="col-2">
-                            Fecha Publicación
-                        </div>
-                        <div class="col-2">
-                            Género
-                        </div>
-                        <div class="col-2">
-                            Precio
-                        </div>
-                    </div>
-                </div>
-
                 <?php
                 $id = recoge("id");
                 $query = "SELECT * FROM libros WHERE id = " . $id;
@@ -106,44 +83,60 @@ include './php/conexion.php';
                 if (mysqli_num_rows($resultado) > 0) {
                     while ($row = mysqli_fetch_assoc($resultado)) {
                 ?>
-                        <div class="col-12 p-3 mt-5 rounded text-center bg-primary text-white">
-                            <div class="row">
-                                <div class="col-2">
-                                    <?php
-                                    print($row["Titulo"]);
-                                    ?>
-                                </div>
-                                <div class="col-2">
-                                    <?php
-                                    print($row["Autor"]);
-                                    ?>
-                                </div>
-                                <div class="col-2">
-                                    <?php
-                                    print($row["Editorial"]);
-                                    ?>
-                                </div>
-                                <div class="col-2">
-                                    <?php
-                                    print($row["Fecha_publicacion"]);
-                                    ?>
-                                </div>
-                                <div class="col-2">
-                                    <?php
-                                    print($row["Genero"]);
-                                    ?>
-                                </div>
-                                <div class="col-2">
-                                    <?php
-                                    print($row["Precio"]);
-                                    ?>
-                                    €
-                                </div>
-                                <div class="col-12 mt-4">
-                                    <a href="./accionCarrito.php?agregar=true" class="btn btn-success">Añadir Al Carrito</a>
+                        <form class="form-inline" method="post" action="./php/addCarrito.php">
+                            <div class="col-12">
+                                <input type="hidden" name="product_id" value="<?php echo $row["id"]; ?>">
+                            </div>
+                            <div class="col-12 p-3 mt-5 rounded text-center bg-primary text-white">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <?php
+                                        print($row["Titulo"]);
+                                        ?>
+                                    </div>
+                                    <div class="col-2">
+                                        <?php
+                                        print($row["Autor"]);
+                                        ?>
+                                    </div>
+                                    <div class="col-2">
+                                        <?php
+                                        print($row["Editorial"]);
+                                        ?>
+                                    </div>
+                                    <div class="col-2">
+                                        <?php
+                                        print($row["Fecha_publicacion"]);
+                                        ?>
+                                    </div>
+                                    <div class="col-2">
+                                        <?php
+                                        print($row["Genero"]);
+                                        ?>
+                                    </div>
+                                    <div class="col-2">
+                                        <?php
+                                        print($row["Precio"]);
+                                        ?>
+                                        €
+                                    </div>
+
+                                    <div class="col-12 mt-4">
+                                        <label for="q" class="form-label">Cantidad</label>
+                                        <select class="form-select" name="q">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 mt-4">
+                                        <button type="submit" class="btn btn-success">Añadir Al Carrito</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     <?php
                     }
                 } else {

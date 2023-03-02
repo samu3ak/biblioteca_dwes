@@ -30,7 +30,7 @@ $agregado = recoge("agregado");
                         <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Buscar Libro</a>
+                        <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="./buscarLibro.php">Buscar Libro</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Listar Libros</a>
@@ -42,13 +42,13 @@ $agregado = recoge("agregado");
                             <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="./administrarLibros.php">Adminisitrar Libros</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Adminisitrar Usuarios</a>
+                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="./administrarUsuarios.php">Adminisitrar Usuarios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Ver Carritos Activos</a>
+                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="./verCarritosActivos.php">Ver Carritos Activos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="index.php">Ver Pedidos</a>
+                            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="bottom" title="Inicio" href="./verPedidos.php">Ver Pedidos</a>
                         </li>
                     <?php
                     }
@@ -59,7 +59,7 @@ $agregado = recoge("agregado");
                 <?php
                 if (isset($_SESSION["login"])) {
                 ?>
-                    <a class="btn btn-outline-light btn-warning" href="/login">Ver Carrito</a>
+                    <a class="btn btn-outline-light btn-warning" href="./carrito.php">Ver Carrito</a>
                     <a class="btn btn-outline-light btn-danger" href="./php/accionLogout.php">Cerrar Sesión</a>
                 <?php
                 } else {
@@ -73,59 +73,65 @@ $agregado = recoge("agregado");
         </div>
     </nav>
     <main>
-        <div class="container-fluid mt-5 mb-5">
-            <div class="row justify-content-center">
-                <form action="./php/accionAgregarLibro.php" class="rounded bg-primary p-4 mb-5 text-white align-self-center" method="POST">
-                    <div class="mt-2 text-center">
-                        <h1 class="display-6">Añadir Nuevo Libro</h1>
-                    </div>
-                    <div class="mb-3 pt-4 ps-5 pe-5">
-                        <label for="username" class="form-label">Titulo del libro</label>
-                        <input type="text" class="form-control" id="username" placeholder="Titulo" name="Titulo">
-                    </div>
-                    <div class="mb-3 pt-4 ps-5 pe-5">
-                        <label for="username" class="form-label">Autor</label>
-                        <input type="text" class="form-control" id="username" placeholder="Autor del libro" name="Autor">
-                    </div>
-                    <div class="mb-3 pt-4 ps-5 pe-5">
-                        <label for="username" class="form-label">Editorial</label>
-                        <input type="text" class="form-control" id="username" placeholder="Editorial del libro" name="Editorial">
-                    </div>
-                    <div class="mb-3 pt-4 ps-5 pe-5">
-                        <label for="username" class="form-label">Fecha de publicación</label>
-                        <input type="text" class="form-control" id="username" placeholder="AAAA-MM-DD" name="Fecha_publicacion">
-                    </div>
-                    <div class="mb-3 pt-4 ps-5 pe-5">
-                        <label for="username" class="form-label">Genero</label>
-                        <input type="text" class="form-control" id="username" placeholder="Género del libro" name="Genero">
-                    </div>
-                    <div class="mb-3 pt-4 ps-5 pe-5">
-                        <label for="username" class="form-label">Precio</label>
-                        <input type="number" class="form-control" id="username" placeholder="Precio del libro" name="Precio">
-                    </div>
-                    <div class="mb-3 pt-4 ps-5 pe-5">
-                        <label for="username" class="form-label">Descripción</label>
-                        <input type="text" class="form-control" id="username" placeholder="Breve descripción del libro" name="Descripción">
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-12 col-sm-6 text-center">
-                            <button type="submit" class="btn btn-success mt-5 buttonFormat me-sm-0 me-md-5">Insertar Libro</button>
+        <?php if (isset($_SESSION["admin"])) { ?>
+            <div class="container-fluid mt-5 mb-5">
+                <div class="row justify-content-center">
+                    <form action="./php/accionAgregarLibro.php" class="rounded bg-primary p-4 mb-5 text-white align-self-center" method="POST">
+                        <div class="mt-2 text-center">
+                            <h1 class="display-6">Añadir Nuevo Libro</h1>
                         </div>
-                        <?php
-                        if ($error) {
-                        ?>
-                            <p class="text-center mt-3 p-1 bg-danger">Rellena correctamente los campos solicitados</p>
-                        <?php
-                        } elseif ($agregado) {
-                        ?>
-                            <p class="text-center mt-3 p-1 bg-success">Libro agregado satisfactoriamente</p>
-                        <?php
-                        }
-                        ?>
-                    </div>
-                </form>
+                        <div class="mb-3 pt-4 ps-5 pe-5">
+                            <label for="username" class="form-label">Titulo del libro</label>
+                            <input type="text" class="form-control" id="username" placeholder="Titulo" name="Titulo">
+                        </div>
+                        <div class="mb-3 pt-4 ps-5 pe-5">
+                            <label for="username" class="form-label">Autor</label>
+                            <input type="text" class="form-control" id="username" placeholder="Autor del libro" name="Autor">
+                        </div>
+                        <div class="mb-3 pt-4 ps-5 pe-5">
+                            <label for="username" class="form-label">Editorial</label>
+                            <input type="text" class="form-control" id="username" placeholder="Editorial del libro" name="Editorial">
+                        </div>
+                        <div class="mb-3 pt-4 ps-5 pe-5">
+                            <label for="username" class="form-label">Fecha de publicación</label>
+                            <input type="text" class="form-control" id="username" placeholder="AAAA-MM-DD" name="Fecha_publicacion">
+                        </div>
+                        <div class="mb-3 pt-4 ps-5 pe-5">
+                            <label for="username" class="form-label">Genero</label>
+                            <input type="text" class="form-control" id="username" placeholder="Género del libro" name="Genero">
+                        </div>
+                        <div class="mb-3 pt-4 ps-5 pe-5">
+                            <label for="username" class="form-label">Precio</label>
+                            <input type="number" class="form-control" id="username" placeholder="Precio del libro" name="Precio">
+                        </div>
+                        <div class="mb-3 pt-4 ps-5 pe-5">
+                            <label for="username" class="form-label">Descripción</label>
+                            <input type="text" class="form-control" id="username" placeholder="Breve descripción del libro" name="Descripción">
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-sm-6 text-center">
+                                <button type="submit" class="btn btn-success mt-5 buttonFormat me-sm-0 me-md-5">Insertar Libro</button>
+                            </div>
+                            <?php
+                            if ($error) {
+                            ?>
+                                <p class="text-center mt-3 p-1 bg-danger">Rellena correctamente los campos solicitados</p>
+                            <?php
+                            } elseif ($agregado) {
+                            ?>
+                                <p class="text-center mt-3 p-1 bg-success">Libro agregado satisfactoriamente</p>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
+        <?php } else { ?>
+            <div class="col-12 text-center mt-5">
+                <h1>No tiene permisos para ver esto</h1>
+            </div>
+        <?php } ?>
     </main>
     <footer class="text-center text-white fixed-bottom bg-primary">
         <div class="text-center p-3">

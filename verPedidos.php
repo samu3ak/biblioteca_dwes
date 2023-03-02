@@ -70,87 +70,101 @@ include './php/conexion.php';
             </form>
         </div>
     </nav>
-    <main>
+    <main class="mb-5">
         <?php if (isset($_SESSION["admin"])) { ?>
             <div class="container-fluid mt-5 mb-5">
                 <div class="row m-5">
                     <div class="col-12 text-center mb-5">
-                        <h1>Adminisitrar Libros</h1>
+                        <h1>Ver Pedidos Realizados</h1>
                     </div>
                     <div class="col-12 p-3 rounded text-center bg-primary text-white">
-                        <div class="row">
+                        <div class="row justify-content-center">
                             <div class="col-2">
+                                Correo del comprador
+                            </div>
+                            <div class="col-1">
                                 Titulo
                             </div>
-                            <div class="col-2">
-                                Autor
-                            </div>
-                            <div class="col-2">
+                            <div class="col-1">
                                 Editorial
                             </div>
-                            <div class="col-2">
-                                Fecha Publicación
+                            <div class="col-1">
+                                Precio Total
                             </div>
-                            <div class="col-2">
-                                Precio
+                            <div class="col-1">
+                                Género
                             </div>
-                            <div class="col-2">
-                                Descripción
+                            <div class="col-1">
+                                Cantidad Pedida
+                            </div>
+                            <div class="col-1">
+                                Fecha de compra
+                            </div>
+                            <div class="col-1">
+                                Id del carrito
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-12 p-3 rounded text-center bg-primary text-white">
-                        <a class="btn btn-success" href="./agregarLibro.php">Añadir Libro Nuevo</a>
-                    </div>
-
                     <?php
-                    $query = "SELECT * FROM libros";
+                    $query = "SELECT * FROM carrito";
                     $resultado = mysqli_query($db, $query);
                     if (mysqli_num_rows($resultado) > 0) {
                         while ($row = mysqli_fetch_assoc($resultado)) {
+                            $idCarrito = $row["id"];
+                            $queryPedido = "SELECT * FROM carrito_producto WHERE cart_id = " . $idCarrito;
+                            $resultadoPedido = mysqli_query($db, $queryPedido);
+                            while ($rowPedido = mysqli_fetch_assoc($resultadoPedido)) {
+                                $queryLibro = "SELECT * FROM libros WHERE id = '" . $rowPedido["product_id"] . "'";
+                                $resultadoLibro = mysqli_query($db, $queryLibro);
+                                $rowLibro = mysqli_fetch_assoc($resultadoLibro)
                     ?>
-                            <div class="col-12 p-3 mt-5 rounded text-center bg-primary text-white">
-                                <div class="row">
-                                    <div class="col-2">
-                                        <?php
-                                        print($row["Titulo"]);
-                                        ?>
-                                    </div>
-                                    <div class="col-2">
-                                        <?php
-                                        print($row["Autor"]);
-                                        ?>
-                                    </div>
-                                    <div class="col-2">
-                                        <?php
-                                        print($row["Editorial"]);
-                                        ?>
-                                    </div>
-                                    <div class="col-2">
-                                        <?php
-                                        print($row["Fecha_publicacion"]);
-                                        ?>
-                                    </div>
-                                    <div class="col-2">
-                                        <?php
-                                        print($row["Precio"]);
-                                        ?>
-                                        €
-                                    </div>
-                                    <div class="col-2">
-                                        <?php
-                                        print($row["Descripción"]);
-                                        ?>
-                                    </div>
-                                    <div class="col-12 mt-4">
-                                        <a href="./php/accionEliminarLibro.php?id=<?php
-                                                                                    print($row["id"]);
-                                                                                    ?>" class=" btn btn-danger">Eliminar Libro</a>
+                                <div class="col-12 p-3 mt-5 rounded text-center bg-primary text-white">
+                                    <div class="row justify-content-center">
+                                        <div class="col-2">
+                                            <?php
+                                            print($row["client_email"]);
+                                            ?>
+                                        </div>
+                                        <div class="col-1">
+                                            <?php
+                                            print($rowLibro["Titulo"]);
+                                            ?>
+                                        </div>
+                                        <div class="col-1">
+                                            <?php
+                                            print($rowLibro["Editorial"]);
+                                            ?>
+                                        </div>
+                                        <div class="col-1">
+                                            <?php
+                                            print($rowLibro["Precio"] * $rowPedido["q"]);
+                                            ?>
+                                            €
+                                        </div>
+                                        <div class="col-1">
+                                            <?php
+                                            print($rowLibro["Genero"]);
+                                            ?>
+                                        </div>
+                                        <div class="col-1">
+                                            <?php
+                                            print($rowPedido["q"]);
+                                            ?>
+                                        </div>
+                                        <div class="col-1">
+                                            <?php
+                                            print($row["created_at"]);
+                                            ?>
+                                        </div>
+                                        <div class="col-1">
+                                            <?php
+                                            print($row["id"]);
+                                            ?>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                         <?php
+                            }
                         }
                     } else {
                         ?>
@@ -164,14 +178,13 @@ include './php/conexion.php';
                     ?>
 
                 </div>
-            </div>
-        <?php } else { ?>
+            </div><?php } else { ?>
             <div class="col-12 text-center mt-5">
                 <h1>No tiene permisos para ver esto</h1>
             </div>
         <?php } ?>
     </main>
-    <footer class="text-center text-white fixed-bottom bg-primary">
+    <footer class="text-center text-white mt-5 fixed-bottom bg-primary">
         <div class="text-center p-3">
             <a class="text-white">© 2023 Copyright: Libros Paco</a>
         </div>

@@ -33,7 +33,7 @@ $registrado = recoge("registrado");
                     </div>
                     <div class="mb-3 pt-4 ps-5 pe-5">
                         <label for="correo" class="form-label">Correo</label>
-                        <input type="text" class="form-control" id="correo" placeholder="Escribe tu correo electrónico" name="correo">
+                        <input type="email" class="form-control" id="correo" placeholder="Escribe tu correo electrónico" name="correo">
                     </div>
                     <div class="mb-3 pt-4 ps-5 pe-5">
                         <label for="exampleInputPassword1" class="form-label">Contraseña</label>
@@ -58,7 +58,9 @@ $registrado = recoge("registrado");
                         <?php
                         } elseif ($errorRegistro) {
                         ?>
-                            <p class="text-center mt-4 p-2 bg-danger rounded">No ha introducido los datos correctamente</p>
+                            <p class="text-center mt-4 p-2 bg-danger rounded"><?php
+                            print($errorRegistro);
+                            ?></p>
                         <?php
                         }
                         ?>
